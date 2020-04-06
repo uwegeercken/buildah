@@ -6,7 +6,7 @@ image_version="1.0"
 image_format="docker"
 image_author="uwe.geercken@web.de"
 image_registry="silent1:8083"
-image_registry_group="silent1:8082"
+image_registry_group="${image_registry_docker_group}"
 image_registry_user="admin"
 image_tag="${image_registry}/${image_name}:${image_version}"
 
