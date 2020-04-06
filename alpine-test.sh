@@ -18,10 +18,10 @@ image_tag="${image_registry_docker_private}/${image_name}:${image_version}"
 container_user="uwe"
 container_user_group="uwe"
 
-echo "start of build: ${image_name}:${image_version}"
+echo "[script] start of build: ${image_name}:${image_version}"
 container=$(buildah from ${image_registry_docker_group}/${image_base})
 
-echo "working container: ${container}"
+echo "[script] working container: ${container}"
 
 buildah run $container adduser -S "${container_user}" -G "${container_user_group}"
 buildah run $container chown root:${container_user} /opt
@@ -32,18 +32,19 @@ buildah config --author "${image_author}" $container
 buildah config --label name="${image_name}" $container
 buildah config --user "${container_user}" $container
 
-echo "committing to image: ${image_name}"
+echo "[script] committing to image: ${image_name}"
 buildah commit --format "${image_format}" $container "${image_name}"
 
-echo "removing container: ${container}"
+echo "[script] removing container: ${container}"
 buildah rm $container
 
-echo "tagging ${image_name}: ${image_tag}"
+echo "[script] tagging ${image_name}: ${image_tag}"
 buildah tag  "${image_name}" "${image_tag}"
 
-echo "login to registry ${image_registry_docker_private}, using user: ${image_registry_user}"
+echo "[script] login to registry ${image_registry_docker_private}, using user: ${image_registry_user}"
 buildah login -u "${image_registry_user}" -p fasthans "${image_registry_docker_private}"
 
-echo "pushing image to: ${image_registry_docker_private}"
+echo "[script] pushing image ${image_name}:latest to: ${image_registry_docker_private}"
 buildah push --tls-verify=false "${image_name}" "docker://${image_registry_docker_private}/${image_name}"
+echo "[script] pushing image ${image_name}:${image_version} to: ${image_registry_docker_private}"
 buildah push --tls-verify=false "${image_name}:${image_version}" "docker://${image_tag}"
