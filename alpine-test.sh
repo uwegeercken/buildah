@@ -13,7 +13,6 @@ image_name="myalpine"
 image_version="1.0"
 image_format="docker"
 image_author="uwe.geercken@web.de"
-image_registry_user="admin"
 image_tag="${image_registry_docker_private}/${image_name}:${image_version}"
 
 container_user="uwe"
