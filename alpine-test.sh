@@ -5,7 +5,8 @@
 # following environment variables are required to be available:
 # image_registry_docker_group >> the url for the docker group repository in the registry server (for pulling images)
 # image_registry_docker_private >> the url for the docker private repository in the registry server (for pushing images)
-# image_registry_password >> the password to login to the docker private repository (for pushing images)
+# image_registry_user >> the userid to login to the private registry (for pushing images)
+# image_registry_password >> the password to login to the private registry (for pushing images)
 
 image_base="alpine"
 image_name="myalpine"
