@@ -5,6 +5,7 @@
 # following environment variables are required to be available:
 # image_registry_docker_group >> the url for the docker group repository in the registry server (for pulling images)
 # image_registry_docker_private >> the url for the docker private repository in the registry server (for pushing images)
+# image_registry_password >> the password to login to the docker private repository (for pushing images)
 
 image_base="alpine"
 image_name="myalpine"
@@ -41,7 +42,7 @@ echo "[script] tagging ${image_name}: ${image_tag}"
 buildah tag  "${image_name}" "${image_tag}"
 
 echo "[script] login to registry ${image_registry_docker_private}, using user: ${image_registry_user}"
-buildah login -u "${image_registry_user}" -p fasthans "${image_registry_docker_private}"
+buildah login -u "${image_registry_user}" -p "${image_registry_password}" "${image_registry_docker_private}"
 
 echo "[script] pushing image ${image_name}:latest to: ${image_registry_docker_private}"
 buildah push --tls-verify=false "${image_name}" "docker://${image_registry_docker_private}/${image_name}"
