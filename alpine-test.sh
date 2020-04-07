@@ -3,9 +3,8 @@
 # script to build image from alpine base image_tag
 
 # following environment variables are required to be available:
-# image_registry_docker_group >> the url for the docker group repository in the registry server
-# image_registry_docker_private >> the url for the docker private repository in the registry server
-
+# image_registry_docker_group >> the url for the docker group repository in the registry server (for pulling images)
+# image_registry_docker_private >> the url for the docker private repository in the registry server (for pushing images)
 
 image_base="alpine"
 image_name="myalpine"
