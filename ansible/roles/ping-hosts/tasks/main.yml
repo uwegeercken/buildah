@@ -1,4 +1,6 @@
 ---
+- debug:
+    msg: "user for ssh connection: {{ ansible_ssh_user }}"
+
 - name: check connectivity
   ping:
-
