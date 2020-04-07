@@ -1,0 +1,6 @@
+---
+- name: ping hosts
+  hosts: localhost
+  connection: local
+  roles:
+    - ping-hosts
