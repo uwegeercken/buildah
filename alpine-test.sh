@@ -23,6 +23,7 @@ container=$(buildah from ${image_registry_docker_group}/${image_base})
 
 echo "[script] working container: ${container}"
 
+buildah run $container addgroup -S "${container_user_group}"
 buildah run $container adduser -S "${container_user}" -G "${container_user_group}"
 buildah run $container chown root:${container_user} /opt
 buildah run $container chmod g+w /opt
