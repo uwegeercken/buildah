@@ -3,5 +3,8 @@
 - debug:
     msg: "vault test string: {{ uwe }}"
 
+- debug:
+    msg: "vault test2 string: {{ something }}"    
+
 - name: check connectivity
   ping:
