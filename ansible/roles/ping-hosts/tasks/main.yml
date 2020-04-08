@@ -1,6 +1,4 @@
 ---
-- debug:
-    msg: "user for ssh connection: {{ ansible_ssh_user }}"
 
 - debug:
     msg: "vault test string: {{ uwe }}"
