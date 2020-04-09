@@ -46,6 +46,6 @@ echo "[script] login to registry ${image_registry_docker_private}, using user: $
 buildah login -u "${image_registry_user}" -p "${image_registry_password}" "${image_registry_docker_private}"
 
 echo "[script] pushing image ${image_name}:latest to: ${image_registry_docker_private}"
-buildah push --tls-verify=false "${image_name}" "docker://${image_registry_docker_private}/${image_name}"
+buildah push --tls-verify=false "localhost/${image_name}" "docker://${image_registry_docker_private}/${image_name}"
 echo "[script] pushing image ${image_name}:${image_version} to: ${image_registry_docker_private}"
 buildah push --tls-verify=false "${image_name}:${image_version}" "docker://${image_tag}"
