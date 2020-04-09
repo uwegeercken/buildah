@@ -33,19 +33,19 @@ buildah config --author "${image_author}" $container
 buildah config --label name="${image_name}" $container
 buildah config --user "${container_user}" $container
 
-echo "[script] committing to image: ${image_name}"
-buildah commit --format "${image_format}" $container "${image_name}"
+echo "[script] committing to image: ${image_registry_docker_private}/${image_name}"
+buildah commit --format "${image_format}" $container "${image_registry_docker_private}/${image_name}"
 
 echo "[script] removing container: ${container}"
 buildah rm $container
 
 echo "[script] tagging ${image_name}: ${image_tag}"
-buildah tag  "${image_name}" "${image_tag}"
+buildah tag  "${image_registry_docker_private}/${image_name}" "${image_tag}"
 
 echo "[script] login to registry ${image_registry_docker_private}, using user: ${image_registry_user}"
 buildah login -u "${image_registry_user}" -p "${image_registry_password}" "${image_registry_docker_private}"
 
 echo "[script] pushing image ${image_name}:latest to: ${image_registry_docker_private}"
-buildah push --tls-verify=false "localhost/${image_name}" "docker://${image_registry_docker_private}/${image_name}"
+buildah push --tls-verify=false "${image_registry_docker_private}/${image_name}" "docker://${image_registry_docker_private}/${image_name}"
 echo "[script] pushing image ${image_name}:${image_version} to: ${image_registry_docker_private}"
-buildah push --tls-verify=false "${image_name}:${image_version}" "docker://${image_tag}"
+buildah push --tls-verify=false "${image_registry_docker_private}/${image_name}:${image_version}" "docker://${image_tag}"
